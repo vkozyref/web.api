@@ -1,0 +1,6 @@
+bin
+*.suo
+[Rr]elease*/
+[Dd]ebug*/
+packages
+*.user
