@@ -49,6 +49,14 @@
       <Project>{0825d746-55e3-4b54-81dd-0bfcddd6fd4e}</Project>
       <Name>web.api.business.entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\web.api.data.access\web.api.data.access.csproj">
+      <Project>{c2508c4f-930a-4e6c-93bc-0b9ddd13fd8b}</Project>
+      <Name>web.api.data.access</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\web.api.data.entities\web.api.data.entities.csproj">
+      <Project>{3407e4c4-994a-4dd3-a0f7-a55ecbfb476c}</Project>
+      <Name>web.api.data.entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

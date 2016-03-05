@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Http;
 using web.api.business.logic.Contracts.Products;
 using web.api.business.logic.Implementation;
+using web.api.data.access.Contracts;
+using web.api.data.access.Implementation;
 
 namespace web.api
 {
@@ -26,7 +28,8 @@ namespace web.api
             // OPTIONAL: Register the Autofac filter provider.
             builder.RegisterWebApiFilterProvider(config);
 
-            builder.RegisterType<ProductService>().As<IProductService>();
+            builder.RegisterType<ProductService>().As<IProductService>().PropertiesAutowired().InstancePerDependency();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

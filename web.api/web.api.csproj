@@ -300,6 +300,10 @@
       <Project>{158dea9a-a227-400c-b8f8-908b18c57022}</Project>
       <Name>web.api.business.logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\web.api.data.access\web.api.data.access.csproj">
+      <Project>{c2508c4f-930a-4e6c-93bc-0b9ddd13fd8b}</Project>
+      <Name>web.api.data.access</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
