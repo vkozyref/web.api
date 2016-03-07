@@ -10,6 +10,9 @@ namespace web.api.business.logic.Contracts.Products
     public interface IProductService
     {
         Task<IEnumerable<Product>> GetProducts();
-
+        Task<Product> GetProduct(int id);
+        Task UpdateProduct(Product product);
+        Task RemoveProduct(int id);
+        Task AddProduct(Product product);
     }
 }

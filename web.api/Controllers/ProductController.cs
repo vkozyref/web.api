@@ -20,5 +20,32 @@ namespace web.api.Controllers
         {
             return await ProductService.GetProducts();
         }
+
+        [Route("{id}")]
+        public async Task<Product> GetProduct(int id)
+        {
+            return await ProductService.GetProduct(id);
+        }
+
+        [Route]
+        [HttpPost]
+        public async Task AddProuct([FromBody]Product product)
+        {
+            await ProductService.AddProduct(product);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task RemoveProduct(int id)
+        {
+            await ProductService.RemoveProduct(id);
+        }
+
+        [Route]
+        [HttpPut]
+        public async Task UpdateProduct([FromBody]Product product)
+        {
+            await ProductService.UpdateProduct(product);
+        }
     }
 }
