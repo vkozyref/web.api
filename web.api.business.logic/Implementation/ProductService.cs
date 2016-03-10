@@ -12,33 +12,38 @@ namespace web.api.business.logic.Implementation
 {
     public class ProductService : IProductService
     {
-        public IRepository<ProductEntity> ProductRepository { get; set; }
+        public IRepository<ProductEntity> _productRepository { get; set; }
+        /*private readonly IRepository<ProductEntity> _productRepository;
+        public ProductService(IRepository<ProductEntity> productRepository)
+        {
+            _productRepository = productRepository;
+        }*/
 
         public async Task AddProduct(Product product)
         {
-            await ProductRepository.Add(ProductToEntity(product));
+            await _productRepository.Add(ProductToEntity(product));
         }
 
         public async Task<Product> GetProduct(int id)
         {
-            var product = await ProductRepository.Get(x => x.Id == id);
+            var product = await _productRepository.Get(x => x.Id == id);
             return EntityToProduct(product);
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            var products = await ProductRepository.GetMany(p => true);
+            var products = await _productRepository.GetMany(p => true);
             return products.Select(s => EntityToProduct(s));
         }
 
         public async Task RemoveProduct(int id)
         {
-            await ProductRepository.Remove(p => p.Id == id);
+            await _productRepository.Remove(p => p.Id == id);
         }
 
         public async Task UpdateProduct(Product product)
         {
-            await ProductRepository.Update(p => p.Id == product.Id, mp => {
+            await _productRepository.Update(p => p.Id == product.Id, mp => {
                 mp.Name = product.Name;
             });
         }

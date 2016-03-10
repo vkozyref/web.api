@@ -275,7 +275,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -303,6 +305,10 @@
     <ProjectReference Include="..\web.api.data.access\web.api.data.access.csproj">
       <Project>{c2508c4f-930a-4e6c-93bc-0b9ddd13fd8b}</Project>
       <Name>web.api.data.access</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\web.api.data.entities\web.api.data.entities.csproj">
+      <Project>{3407e4c4-994a-4dd3-a0f7-a55ecbfb476c}</Project>
+      <Name>web.api.data.entities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

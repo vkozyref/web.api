@@ -8,14 +8,15 @@ using web.api.data.access.Contracts;
 
 namespace web.api.data.access.Implementation
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class, IDisposable
     {
         private readonly DbContext _context;
         private readonly IDbSet<T> _dbSet;
+        private bool disposed = false;       
 
-        public Repository()
+        public Repository(DbContext context)
         {
-            _context = new Context();
+            _context = context;
             _dbSet = _context.Set<T>();
 
         }
@@ -59,6 +60,24 @@ namespace web.api.data.access.Implementation
             var entry = _context.Entry(entity);
             entry.State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

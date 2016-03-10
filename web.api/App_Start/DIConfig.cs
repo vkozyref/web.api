@@ -2,12 +2,14 @@
 using Autofac.Integration.WebApi;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using web.api.business.logic.Contracts.Products;
 using web.api.business.logic.Implementation;
+using web.api.data.access;
 using web.api.data.access.Contracts;
 using web.api.data.access.Implementation;
 
@@ -23,13 +25,14 @@ namespace web.api
             var config = GlobalConfiguration.Configuration;
 
             // Register your Web API controllers.
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest().PropertiesAutowired();
 
             // OPTIONAL: Register the Autofac filter provider.
             builder.RegisterWebApiFilterProvider(config);
 
-            builder.RegisterType<ProductService>().As<IProductService>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency();
+            builder.RegisterType<ProductService>().As<IProductService>().InstancePerDependency().PropertiesAutowired();
+            builder.Register<DbContext>(c => new Context()).InstancePerRequest().PropertiesAutowired();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency().PropertiesAutowired();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
