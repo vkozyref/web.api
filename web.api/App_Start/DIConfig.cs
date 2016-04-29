@@ -25,14 +25,15 @@ namespace web.api
             var config = GlobalConfiguration.Configuration;
 
             // Register your Web API controllers.
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest().PropertiesAutowired();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // OPTIONAL: Register the Autofac filter provider.
             builder.RegisterWebApiFilterProvider(config);
 
-            builder.RegisterType<ProductService>().As<IProductService>().InstancePerDependency().PropertiesAutowired();
-            builder.Register<DbContext>(c => new Context()).InstancePerRequest().PropertiesAutowired();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency().PropertiesAutowired();
+            //builder.Register<DbContext>(c => new Context()).InstancePerRequest();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.RegisterType<ProductService>().As<IProductService>().InstancePerDependency();
+            
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

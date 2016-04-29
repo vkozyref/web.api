@@ -12,12 +12,12 @@ namespace web.api.business.logic.Implementation
 {
     public class ProductService : IProductService
     {
-        public IRepository<ProductEntity> _productRepository { get; set; }
-        /*private readonly IRepository<ProductEntity> _productRepository;
+        //public IRepository<ProductEntity> _productRepository { get; set; }
+        private readonly IRepository<ProductEntity> _productRepository;
         public ProductService(IRepository<ProductEntity> productRepository)
         {
             _productRepository = productRepository;
-        }*/
+        }
 
         public async Task AddProduct(Product product)
         {

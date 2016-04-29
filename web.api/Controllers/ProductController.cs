@@ -13,21 +13,23 @@ namespace web.api.Controllers
     [RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
-        public IProductService _productService { get; set; }
-        /*private readonly IProductService _productService;
+       // public IProductService _productService { get; set; }
+        private readonly IProductService _productService;
 
         public ProductController(IProductService productService)
         {
             _productService = productService;
-        }*/
+        }
 
         [Route]
+        [HttpGet]
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await _productService.GetProducts();
         }
 
         [Route("{id}")]
+        [HttpGet]
         public async Task<Product> GetProduct(int id)
         {
             return await _productService.GetProduct(id);

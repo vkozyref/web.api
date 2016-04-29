@@ -14,10 +14,10 @@ namespace web.api.data.access.Implementation
         private readonly IDbSet<T> _dbSet;
         private bool disposed = false;       
 
-        public Repository(DbContext context)
+        public Repository()
         {
-            _context = context;
-            _dbSet = _context.Set<T>();
+            //_context = new Context();
+            //_dbSet = _context.Set<T>();
 
         }
 
@@ -34,7 +34,8 @@ namespace web.api.data.access.Implementation
 
         public async Task<IEnumerable<T>> GetMany(Func<T, bool> criteria)
         {
-            return _dbSet.Where(criteria);
+            return new List<T>();
+            //return _dbSet.Where(criteria);
         }
 
         public async Task Remove(Func<T, bool> criteria)
